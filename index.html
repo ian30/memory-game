@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <script src="createGame.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css.css">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center my-4">Memory Game <small class="h6">Refresh the page to restart the board</small></h1>
+            <!-- <select name="grid_size" id="grid_size">
+                <option value="easy">Easy</option>
+                <option value="hard">Hard</option>
+                <option value="insane">Insanely Hard</option>
+            </select> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col"><h4 class="text-left mt-4"><span id="grid_setup"></span> grid</h4></div>
+            <div class="col" id="keepScore">Score:<span></span></div>
+            <div class="col"><span id="gameMessage"></span></div>
+        </div>
+        
+        <hr>
+        <div id="gameBox"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <button class="btn btn-primary" id="hint">Hint (clicking this will reduce your score by 5)</button>
+        </div>
+    </div>
+    <div id="matchSticker">
+        <span>Match!</span>
+    </div>
+
+    <div class="spacer"></div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                2024. Ian Shnayder 
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>

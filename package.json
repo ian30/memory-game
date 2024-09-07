@@ -1,0 +1,11 @@
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "just testing",
+  "main": "index.html",
+  "scripts": {
+    "test": "live-server"
+  },
+  "author": "Inon Shnayder",
+  "license": "ISC"
+}
