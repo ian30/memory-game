@@ -1,4 +1,12 @@
 'use strict';
+//getting URL params so the user can set up the grid they want thru the game URL:
+const query = window.location.search;
+const urlParams = new URLSearchParams(query);
+const grid_ = String(urlParams.get('grid'));
+console.log('grid_: ', grid_[0])
+let x = grid_[0];
+let y = grid_[2];
+// game creation and logic (most of it, more things left to do.)
 document.addEventListener('DOMContentLoaded', function(){
     let gameBox = document.body;
     const imagesSetOne = ['img_0','img_1','img_2','img_3','img_4','img_5','img_6','img_7','img_8','img_9','img_10','img_11','img_12'];
@@ -44,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
     }
-    generateGameRows(4,4);
+    generateGameRows(x,y);
 
     const allCards = document.querySelectorAll('.card');
     const allCovers = document.querySelectorAll('.cardCover');
