@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const imagesSetOne = ['img_0','img_1','img_2','img_3','img_4','img_5','img_6','img_7','img_8','img_9','img_10','img_11','img_12'];
     const setOnePath = '/assets/set1/';
     const keepScoreEl = document.querySelector('#keepScore > span');
+    const clickSheild = document.getElementById('clickSheild');
     console.log('keepScoreEl', keepScoreEl)
 
     //shuffle the images inside the imageSet array: 
@@ -73,7 +74,9 @@ document.addEventListener('DOMContentLoaded', function(){
     showCardsHint()
 
     document.getElementById('hint').addEventListener('click', function() {
+        //if user uses hints to many times, he loses the game. 
         if (currentScore <= 0) {
+            gameBox.style = 'background-color: red;';
             alert('game over!');
         } else {
             currentScore = currentScore - 5;
@@ -92,22 +95,31 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     })
     
-    allCovers.forEach(cover => {      
+    allCovers.forEach((cover, i) => {      
         cover.addEventListener('click', function() {
+            exposedCards++;
+            console.log(`card-${i}`, exposedCards)
             this.classList.add('hidden', 'disablePoinetrEvents') // clicking on the card expose the shape under. 
             exposedShape = cover.nextElementSibling.src.replace(/^.*[\\/]/, '');//clean the url so we only have the file name
             exposedShapesArray.push(exposedShape);// push the shape into a temporary array 
             //hiding /showing cards logic. 
-            exposedCards++;
+            if (exposedCards >= 2) {
+                clickSheild.style = 'display:block;';
+                setTimeout(() => {
+                    clickSheild.style = 'display:none;';
+                }, 1500);
+            }
             allCovers.forEach((coverEl, index=0) => {
                 let cardRootElement = coverEl.parentElement;
                 //hide if 2 cards are exposed:
                 if (coverEl.classList.contains('hidden')) {
                     if(exposedCards >= 2) {
-                        let shapeMatch = exposedShapesArray[0] === exposedShapesArray[1];
+                        let shapeMatch = exposedShapesArray[0] === exposedShapesArray[1]; //check if the same shape 
                         if (shapeMatch) {
-                            messageBoxEl.innerHTML = "<div>🃏🃏 Match! 👍🏻</div>";
+                            messageBoxEl.innerHTML = "<div>🃏🃏 Match! 👍🏻</div>";//show user nice message
                             messageBoxEl.classList.add('matchFound');
+                            let matchSound = document.getElementById('audioMatch');
+                            matchSound.play();
                             exposedShapesArray = [];
                             currentScore = currentScore + 5;
                             keepScoreEl.innerHTML = currentScore;
@@ -126,6 +138,8 @@ document.addEventListener('DOMContentLoaded', function(){
                         } else {
                             messageBoxEl.innerHTML = "<div>🃏🃏 Don't Match 😥</div>";
                             messageBoxEl.classList.add('noMatch');
+                            let errorSound = document.getElementById('audioError');
+                            errorSound.play();
                             currentScore = currentScore - 2.5;
                             keepScoreEl.innerHTML = currentScore;
                             //cardRootElement.classList.remove('disablePoinetrEvents');
